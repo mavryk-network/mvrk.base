@@ -4,7 +4,7 @@ ami_assert(platform_plugin, "failed to load platform plugin - " .. tostring(err)
 local identified, platform = platform_plugin.get_platform()
 ami_assert(identified, "failed to identify platform - " .. tostring(platform), EXIT_PLATFORM_IDENTIFICATION_ERROR)
 
-local download_links = hjson.parse(fs.read_file("__xtz/sources.hjson"))
+local download_links = hjson.parse(fs.read_file("__mvrk/sources.hjson"))
 
 -- Select platform
 local platform_key = nil
@@ -25,7 +25,7 @@ local download_urls = download_links[platform_key]
 ami_assert(download_urls ~= nil, "no download URLs found for platform: " .. platform_key)
 
 -- Merge with update sources if available (per-binary version comparison)
-local update_content = fs.read_file("__xtz/sources.update.hjson")
+local update_content = fs.read_file("__mvrk/sources.update.hjson")
 if update_content then
     local update_sources = hjson.parse(update_content)
     if update_sources and update_sources[platform_key] then

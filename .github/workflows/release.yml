@@ -56,8 +56,8 @@ jobs:
       uses: peter-evans/repository-dispatch@v1
       if: ${{ steps.repository_info.outputs.NEEDS_RELEASE == 'true'}}
       with:
-        token: ${{ secrets.AIR_ACCESS_TOKEN }}
-        repository: alis-is/air
+        token: ${{ secrets.MAVRYK_AMI_ACCESS_TOKEN }}
+        repository: mavryk-network/application-image-repository
         event-type: app-release
         client-payload: '{ "id": "${{ steps.repository_info.outputs.ID }}", "repository": "${{github.repository}}", "version": "${{steps.repository_info.outputs.VERSION}}", "package": "${{ steps.release_info.outputs.PACKAGE_SOURCE }}", "sha256": "${{ steps.release_info.outputs.SHA256 }}"}'
 
@@ -84,6 +84,6 @@ jobs:
     - name: Notify new version available
       uses: Ilshidur/action-discord@master
       env:
-        DISCORD_WEBHOOK: ${{ secrets.XTZ_PACKAGES_DISCORD_WEBHOOK }}
+        DISCORD_WEBHOOK: ${{ secrets.MVRK_PACKAGES_DISCORD_WEBHOOK }}
       with:
         args: "New ${{github.repository}} - ${{ needs.build.outputs.version }} released. (<https://github.com/${{github.repository}}/releases/tag/${{ needs.build.outputs.version }}>)"
